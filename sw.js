@@ -1,5 +1,5 @@
-const CACHE = 'skybound-v2';
-const LOCAL = ['./','./index.html','./css/style.css','./js/controls.js','./js/game.js','./manifest.webmanifest','./icon.svg'];
+const CACHE = 'skybound-v3';
+const LOCAL = ['./','./index.html','./css/style.css','./js/game.js','./manifest.webmanifest','./icon.svg'];
 
 self.addEventListener('install', event => {
   event.waitUntil(
