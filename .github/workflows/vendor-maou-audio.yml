@@ -1,0 +1,36 @@
+name: Vendor Maou Audio
+on:
+  push:
+    branches: [fix/landing-audio-assets]
+    paths: ['.github/workflows/vendor-maou-audio.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  download:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/landing-audio-assets
+      - name: Download official MaouDamashii audio
+        run: |
+          set -euxo pipefail
+          mkdir -p assets/audio
+          curl -fL --retry 3 -A 'Mozilla/5.0' -e 'https://maou.audio/' https://maou.audio/sound/bgm/maou_loop_bgm_8bit02.ogg -o assets/audio/field.ogg
+          curl -fL --retry 3 -A 'Mozilla/5.0' -e 'https://maou.audio/' https://maou.audio/sound/bgm/maou_loop_bgm_8bit03.ogg -o assets/audio/event.ogg
+          curl -fL --retry 3 -A 'Mozilla/5.0' -e 'https://maou.audio/' https://maou.audio/sound/bgm/maou_loop_bgm_8bit07.ogg -o assets/audio/battle.ogg
+          curl -fL --retry 3 -A 'Mozilla/5.0' -e 'https://maou.audio/' https://maou.audio/sound/bgm/maou_loop_bgm_8bit21.ogg -o assets/audio/storm.ogg
+          curl -fL --retry 3 -A 'Mozilla/5.0' -e 'https://maou.audio/' https://maou.audio/sound/se/maou_se_system26.ogg -o assets/audio/ui.ogg
+          curl -fL --retry 3 -A 'Mozilla/5.0' -e 'https://maou.audio/' https://maou.audio/sound/se/maou_se_battle05.ogg -o assets/audio/hit.ogg
+          test -s assets/audio/field.ogg
+          test -s assets/audio/event.ogg
+          test -s assets/audio/battle.ogg
+      - name: Commit vendored audio
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- assets/audio/field.ogg assets/audio/event.ogg assets/audio/battle.ogg assets/audio/storm.ogg assets/audio/ui.ogg assets/audio/hit.ogg
+          git diff --cached --quiet && exit 0
+          git commit -m 'Vendor MaouDamashii audio assets'
+          git push origin HEAD:fix/landing-audio-assets
