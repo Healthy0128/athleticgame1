@@ -1,0 +1,36 @@
+(() => {
+'use strict';
+const P=(x,y,w,h,type='solid',opt={})=>({x,y,w,h,type,...opt,baseX:x,baseY:y,active:true,timer:0});
+const E=(x,y,type='walker',opt={})=>({x,y,w:44,h:44,type,dir:opt.dir||1,min:opt.min??x-120,max:opt.max??x+120,speed:opt.speed||95,alive:true,phase:0});
+const C=(x,y)=>({x,y,r:13,taken:false});
+const S=(x,y)=>({x,y,r:21,taken:false});
+const CP=(x,y)=>({x,y,active:false});
+const H=(x,y,w,h)=>({x,y,w,h});
+window.SB_DATA={
+  assets:{
+    idle:'https://raw.githubusercontent.com/ETdoFresh/kenney.nl/master/kenney_simplifiedplatformer/PNG/Characters/platformChar_idle.png',
+    walk1:'https://raw.githubusercontent.com/ETdoFresh/kenney.nl/master/kenney_simplifiedplatformer/PNG/Characters/platformChar_walk1.png',
+    walk2:'https://raw.githubusercontent.com/ETdoFresh/kenney.nl/master/kenney_simplifiedplatformer/PNG/Characters/platformChar_walk2.png',
+    jump:'https://raw.githubusercontent.com/ETdoFresh/kenney.nl/master/kenney_simplifiedplatformer/PNG/Characters/platformChar_jump.png',
+    happy:'https://raw.githubusercontent.com/ETdoFresh/kenney.nl/master/kenney_simplifiedplatformer/PNG/Characters/platformChar_happy.png',
+    tile1:'https://raw.githubusercontent.com/ETdoFresh/kenney.nl/master/kenney_simplifiedplatformer/PNG/Tiles/platformPack_tile001.png',
+    item:'https://raw.githubusercontent.com/ETdoFresh/kenney.nl/master/kenney_simplifiedplatformer/PNG/Items/platformPack_item001.png'
+  },
+  audio:{
+    bgm:'https://raw.githubusercontent.com/blancmathis/Super_Bash_Folds/main/public/assets/audio/open/music/battle-loop.ogg',
+    jump:'https://raw.githubusercontent.com/blancmathis/Super_Bash_Folds/main/public/assets/audio/open/sfx/dodge.ogg',
+    coin:'https://raw.githubusercontent.com/blancmathis/Super_Bash_Folds/main/public/assets/audio/open/sfx/item-pickup.ogg',
+    stomp:'https://raw.githubusercontent.com/blancmathis/Super_Bash_Folds/main/public/assets/audio/open/sfx/hit-light.ogg',
+    damage:'https://raw.githubusercontent.com/blancmathis/Super_Bash_Folds/main/public/assets/audio/open/sfx/hit-heavy.ogg',
+    clear:'https://raw.githubusercontent.com/blancmathis/Super_Bash_Folds/main/public/assets/audio/open/sfx/game-set.ogg',
+    land:'https://raw.githubusercontent.com/blancmathis/Super_Bash_Folds/main/public/assets/audio/open/sfx/land.ogg'
+  },
+  stages:[
+    {name:'Green Run',rank:[38,50,68],width:3600,height:720,spawn:[90,520],goal:[3440,380,24,240],platforms:[P(0,620,760,120),P(880,620,740,120),P(1740,620,760,120),P(2640,620,960,120),P(520,500,180,30),P(980,455,200,30),P(1500,410,190,30),P(2070,500,200,30),P(2470,410,180,30),P(2980,470,200,30)],coins:[[570,445],[1040,400],[1560,355],[2130,445],[2530,355],[3040,415]].map(v=>C(...v)),stars:[S(690,560),S(1610,350),S(3180,390)],enemies:[E(1150,576,'walker',{min:930,max:1500}),E(2210,576,'bounce',{min:1810,max:2460})],checkpoints:[CP(1820,555)],hazards:[]},
+    {name:'Broken Valley',rank:[48,64,84],width:4300,height:720,spawn:[80,520],goal:[4140,360,24,260],platforms:[P(0,620,520,120),P(710,620,420,120),P(1320,620,430,120),P(1960,620,420,120),P(2580,620,420,120),P(3200,620,1100,120),P(500,470,150,28,'moving',{axis:'y',range:120,speed:1.3}),P(870,405,150,28,'crumble'),P(1460,470,150,28,'moving',{axis:'x',range:140,speed:1.1}),P(2110,400,145,28,'crumble'),P(2760,455,150,28,'moving',{axis:'y',range:110,speed:1.5}),P(3060,355,150,28,'crumble'),P(3570,460,170,28)],coins:[[550,415],[925,350],[1510,415],[2160,345],[2810,400],[3110,300],[3630,405]].map(v=>C(...v)),stars:[S(1020,335),S(2270,335),S(3880,520)],enemies:[E(820,576,'walker',{min:730,max:1100,speed:115}),E(1450,576,'bounce',{min:1340,max:1710}),E(3340,576,'walker',{min:3230,max:4020,speed:130})],checkpoints:[CP(2050,555)],hazards:[H(520,675,190,45),H(1130,675,190,45),H(1750,675,210,45),H(2380,675,200,45),H(3000,675,200,45)]},
+    {name:'Wall Ruins',rank:[58,76,100],width:4200,height:720,spawn:[80,520],goal:[4030,240,24,380],platforms:[P(0,620,650,120),P(830,620,520,120),P(1510,620,430,120),P(2120,620,500,120),P(2810,620,500,120),P(3500,620,700,120),P(620,280,62,340),P(770,210,62,410),P(1280,350,62,270),P(1450,235,62,385),P(1920,300,62,320),P(2070,190,62,430),P(2580,340,62,280),P(2770,220,62,400),P(3270,290,62,330),P(3450,180,62,440),P(1030,425,150,28),P(1690,405,150,28),P(2320,430,150,28),P(3000,400,150,28),P(3700,390,180,28)],coins:[[720,170],[1380,205],[2010,155],[2680,185],[3360,145],[3770,335]].map(v=>C(...v)),stars:[S(805,155),S(2110,135),S(3485,125)],enemies:[E(980,576,'walker',{min:860,max:1300,speed:120}),E(2230,576,'bounce',{min:2140,max:2570}),E(3640,576,'walker',{min:3520,max:3980,speed:140})],checkpoints:[CP(2100,555)],hazards:[]},
+    {name:'Velocity Factory',rank:[64,82,108],width:4800,height:720,spawn:[60,520],goal:[4620,200,24,420],platforms:[P(0,620,470,120),P(640,555,170,28,'moving',{axis:'x',range:100,speed:1.8}),P(960,470,150,28,'crumble'),P(1260,380,130,28),P(1540,500,120,28,'moving',{axis:'y',range:120,speed:1.7}),P(1820,390,120,28,'crumble'),P(2100,300,120,28),P(2380,440,120,28,'moving',{axis:'x',range:130,speed:2}),P(2660,340,110,28,'crumble'),P(2940,250,110,28),P(3220,410,110,28,'moving',{axis:'y',range:120,speed:2.1}),P(3500,310,110,28,'crumble'),P(3780,220,110,28),P(4050,350,120,28,'moving',{axis:'x',range:110,speed:2.3}),P(4340,270,130,28),P(4580,620,220,120),P(900,205,52,415),P(1450,250,52,370),P(2300,170,52,450),P(3150,220,52,400),P(3960,160,52,460)],coins:[[720,500],[1020,415],[1320,325],[1880,335],[2160,245],[2715,285],[2995,195],[3555,255],[3835,165],[4400,215]].map(v=>C(...v)),stars:[S(1400,310),S(3060,185),S(4470,195)],enemies:[E(670,510,'bounce',{min:650,max:780}),E(2390,396,'walker',{min:2380,max:2470,speed:150}),E(4070,306,'walker',{min:4050,max:4150,speed:160})],checkpoints:[CP(2440,380)],hazards:[H(470,675,170,45),H(810,675,150,45),H(1120,675,140,45),H(1680,675,140,45),H(1940,675,160,45),H(2500,675,160,45),H(2780,675,160,45),H(3050,675,170,45),H(3330,675,170,45),H(3610,675,170,45),H(3890,675,160,45),H(4170,675,170,45)]},
+    {name:'Sky Tower',rank:[78,98,128],width:1280,height:2700,spawn:[110,2530],goal:[1080,120,24,170],vertical:true,platforms:[P(0,2620,1280,80),P(80,2440,240,28),P(430,2320,220,28,'moving',{axis:'x',range:140,speed:1.3}),P(770,2210,200,28),P(1010,2080,190,28,'crumble'),P(760,1930,180,28),P(470,1810,170,28,'moving',{axis:'y',range:100,speed:1.5}),P(180,1690,170,28),P(60,1510,150,28,'crumble'),P(330,1390,160,28),P(620,1270,160,28,'moving',{axis:'x',range:130,speed:1.7}),P(930,1150,160,28),P(1030,980,150,28,'crumble'),P(760,850,150,28),P(480,720,150,28,'moving',{axis:'y',range:100,speed:1.9}),P(180,590,150,28),P(60,430,150,28,'crumble'),P(340,310,170,28),P(690,220,170,28),P(1000,300,180,28),P(0,2050,55,570),P(355,2050,55,430),P(690,1740,55,580),P(990,1450,55,630),P(250,1120,55,570),P(560,750,55,620),P(900,360,55,800)],coins:[[200,2380],[540,2260],[860,2150],[1080,2020],[840,1870],[550,1750],[260,1630],[130,1450],[410,1330],[700,1210],[1010,1090],[1100,920],[830,790],[550,660],[250,530],[120,370],[420,250],[770,160]].map(v=>C(...v)),stars:[S(620,2260),S(1080,920),S(750,150)],enemies:[E(470,2276,'bounce',{min:440,max:620}),E(780,2166,'walker',{min:780,max:930,speed:135}),E(485,1766,'bounce',{min:480,max:610}),E(940,1106,'walker',{min:930,max:1050,speed:150})],checkpoints:[CP(650,1340),CP(540,680)],hazards:[]}
+  ]
+};
+})();
