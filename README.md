@@ -1,40 +1,26 @@
 # Skybound Sprint
 
-Chat上で作成した、依存ライブラリなしの2D横スクロール・アスレチック試作です。
+横スクロール・アスレチックアクションゲームのWeb版です。
 
-## 起動
-`index.html` をブラウザで開くだけで遊べます。
+## 対応操作
 
-## 操作
-- 左右: ← → または A / D
-- ジャンプ: Space / W / ↑
-- ダッシュ: Shift
-- スマホ: 画面下の仮想ボタン
+- キーボード: ← → / A D で移動、Space / W / ↑ でジャンプ、Shiftでダッシュ
+- iPhone / スマホ: 画面下のタッチボタン
+- Xboxコントローラー: 左スティックまたはD-padで移動、Aでジャンプ、XまたはRTでダッシュ
 
-## 現在の実装
-- 横スクロールカメラ
-- 足場判定
-- ジャンプ / ダッシュ
-- コイン
-- 敵への踏みつけ
-- 被弾ノックバック
-- 落下リスポーン
-- ゴール
-- タイム計測
-- タッチ操作
+## iPhoneでWebアプリとして使う
 
-## 実素材
-KenneyのCC0実PNGをリモート読み込みし、プレイヤーのidle / walk / jump、足場タイル、アイテムを実際に描画します。詳細は `REMOTE_ASSETS.md` を参照してください。
+1. GitHub Pagesで公開したURLをSafariで開く
+2. 共有ボタンをタップ
+3. 「ホーム画面に追加」を選ぶ
+4. ホーム画面のSkyboundアイコンから起動
 
-## 実BGM・SE
-CC0の実OGG音源を接続済みです。ジャンプ、コイン、踏みつけ、被弾、クリア、ステージBGMが実音源で鳴ります。現在は公開URLから読み込むためネット接続が必要です。詳細は `AUDIO_REAL_ASSETS.md` を参照してください。
+`manifest.webmanifest` と Service Worker を含むPWA構成です。ホーム画面から起動するとstandalone表示になります。
 
-## 次の改良候補
-- 敵キャラクターも実スプライト化
-- 被弾アニメーション
-- BGMフェード
-- ステージ選択
-- 壁ジャンプ
-- 動く床
-- トゲ、落下床、バネ
-- リザルト画面
+## 素材
+
+- Graphics: Kenney / CC0
+- Sound Effects: Kenney / CC0
+- Music: Two Simple Game Music Loops by qubodup / CC0
+
+詳細は `CREDITS.txt`、`REMOTE_ASSETS.md`、`AUDIO_REAL_ASSETS.md` を参照してください。
