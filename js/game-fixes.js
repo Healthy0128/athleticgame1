@@ -3,11 +3,10 @@
 const SB=window.SB;
 if(!SB)return;
 
-// Fix: the base engine resets player.onGround before collideY(), so its
-// original "just landed" check fires every grounded frame. That repeatedly
-// clones/plays landing audio and spawns particles, which can tank Safari FPS.
+// Ground-contact hot path: emit no particles or audio on landing.
+// The base engine clears onGround before collideY(), so we keep our own
+// previous-frame grounded flag and only track the transition once.
 SB._groundedLastFrame=false;
-const originalCollideY=SB.collideY;
 SB.collideY=prevY=>{
   const p=SB.player;
   let landed=false;
@@ -23,40 +22,30 @@ SB.collideY=prevY=>{
       p.vy=0;
     }
   }
-
-  const justLanded=landed&&!SB._groundedLastFrame;
   p.onGround=landed;
   if(landed)p.coyote=.12;
-
-  if(justLanded){
-    SB.sfx('land',.16);
-    SB.burst(p.x+p.w/2,p.y+p.h,4,'#fff');
-  }
   SB._groundedLastFrame=landed;
 };
 
-// Reset grounded transition state whenever player position is forcibly reset.
 const originalResetPlayer=SB.resetPlayer;
 SB.resetPlayer=(...args)=>{
   SB._groundedLastFrame=false;
   return originalResetPlayer(...args);
 };
 
-// Defensive caps for mobile Safari: keep transient effects bounded even if a
-// future gameplay bug starts spawning too much again.
+// Keep effects intentionally restrained on mobile Safari.
 const originalBurst=SB.burst;
 SB.burst=(x,y,n,color)=>{
-  if(SB.particles.length>96) return;
-  originalBurst(x,y,Math.min(n,10),color);
-  if(SB.particles.length>120) SB.particles.splice(0,SB.particles.length-120);
+  if(SB.particles.length>=48)return;
+  originalBurst(x,y,Math.min(n,6),color);
+  if(SB.particles.length>60)SB.particles.splice(0,SB.particles.length-60);
 };
 
-// Limit simultaneously alive projectile effects too.
 const originalUpdate=SB.update;
 SB.update=dt=>{
   originalUpdate(dt);
-  if(Array.isArray(SB.projectiles)&&SB.projectiles.length>40){
-    SB.projectiles.splice(0,SB.projectiles.length-40);
+  if(Array.isArray(SB.projectiles)&&SB.projectiles.length>28){
+    SB.projectiles.splice(0,SB.projectiles.length-28);
   }
 };
 })();
