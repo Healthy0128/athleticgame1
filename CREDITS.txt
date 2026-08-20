@@ -1,0 +1,14 @@
+Skybound Sprint - Credits
+
+Game prototype / code:
+Created in ChatGPT
+
+Graphics:
+Kenney - https://kenney.nl/
+License: CC0 1.0
+
+Music:
+Two Simple Game Music Loops by qubodup - CC0 1.0
+
+Sound Effects:
+Kenney - CC0 1.0
