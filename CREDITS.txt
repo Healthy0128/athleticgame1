@@ -1,14 +1,27 @@
 Skybound Sprint - Credits
 
 Game prototype / code:
-Created in ChatGPT
+Created with ChatGPT
 
 Graphics:
 Kenney - https://kenney.nl/
 License: CC0 1.0
 
-Music:
-Two Simple Game Music Loops by qubodup - CC0 1.0
+Music / selected sound effects:
+魔王魂 (MaouDamashii) / 森田交一
+https://maou.audio/
+Used under the current MaouDamashii material usage terms.
+Runtime references official distribution URLs; audio files are not redistributed in this repository.
 
-Sound Effects:
+Selected BGM:
+- 8bit02 (こうだいなせかい)
+- 8bit03 (くじけぬもの)
+- 8bit07 (けっせん)
+- 8bit21 (あれるふなたび)
+
+Selected SFX:
+- システム26
+- 戦闘05
+
+Additional legacy sound effects:
 Kenney - CC0 1.0
