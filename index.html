@@ -30,7 +30,7 @@
         <div class="menu" id="mainMenu"><button id="playBtn">PLAY</button><button id="stageSelectBtn" class="secondary">STAGE SELECT</button><button id="ghostBtn" class="secondary">GHOST: ON</button></div>
         <div id="stageSelect" class="stage-select hidden"></div>
         <p class="controls">移動：← → / A D　ジャンプ：Space / Aボタン　ダッシュ：同方向2連打　壁際ジャンプ：壁キック　ESC / START：ポーズ</p>
-        <p class="credits-mini">音楽・一部効果音：魔王魂（森田交一） / Graphics: Kenney</p>
+        <p class="credits-mini">BGM: Skybound local chiptune / Graphics: Kenney / Additional SFX: CC0 sources</p>
       </div></div>
     </section>
     <section class="help"><button id="restartBtn">RESTART</button><button id="muteBtn">SOUND ON</button><span id="controllerStatus">スマホ / キーボード / Xboxコントローラー対応</span></section>
@@ -43,6 +43,7 @@
   <script src="js/game-phase2.js"></script>
   <script src="js/game-fixes.js"></script>
   <script src="js/game-fullpower.js"></script>
+  <script src="js/game-audio-local.js"></script>
   <script src="js/boot.js"></script>
   <script>if('serviceWorker'in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));</script>
 </body>
