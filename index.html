@@ -17,13 +17,11 @@
 <body>
   <main class="app">
     <header class="topbar">
-      <div>
-        <h1>Skybound Sprint</h1>
-        <p>Chat上で作った横スクロール・アスレチック試作</p>
-      </div>
+      <div class="brand"><h1>Skybound Sprint</h1><p>Momentum platformer</p></div>
       <div class="hud">
         <span id="hearts" class="hearts">♥♥♥</span>
         <span id="stage">STAGE 1/5</span>
+        <span id="stars">★ 0/3</span>
         <span id="coins">COIN 0</span>
         <span id="time">TIME 0.0</span>
         <span id="status">READY</span>
@@ -31,14 +29,19 @@
     </header>
 
     <section class="game-shell">
-      <canvas id="game" width="1280" height="720" aria-label="2D platform action game"></canvas>
-
-      <div class="overlay" id="startOverlay">
-        <div class="panel">
-          <h2>Skybound Sprint</h2>
-          <p>ゴール旗まで駆け抜けよう。</p>
-          <p class="controls">← → / A D：移動　Space / W / ↑：ジャンプ　方向キー2連打：ダッシュ　壁際ジャンプ：壁キック</p>
-          <button id="startBtn">START</button>
+      <canvas id="game" width="1280" height="720" aria-label="Skybound Sprint game"></canvas>
+      <div class="overlay" id="overlay">
+        <div class="panel" id="panel">
+          <h2 id="overlayTitle">Skybound Sprint</h2>
+          <p id="overlayText">走って、跳んで、壁を蹴って、5つのステージを駆け抜けよう。</p>
+          <div id="resultBox" class="result-box hidden"></div>
+          <div class="menu" id="mainMenu">
+            <button id="playBtn">PLAY</button>
+            <button id="stageSelectBtn" class="secondary">STAGE SELECT</button>
+            <button id="ghostBtn" class="secondary">GHOST: ON</button>
+          </div>
+          <div id="stageSelect" class="stage-select hidden"></div>
+          <p class="controls">移動：← → / A D　ジャンプ：Space / Aボタン　ダッシュ：同方向2連打　壁際ジャンプ：壁キック　ESC / START：ポーズ</p>
         </div>
       </div>
     </section>
@@ -51,20 +54,18 @@
 
     <section class="touch-controls" aria-label="タッチ操作">
       <div class="touch-left">
-        <button class="move-btn" data-key="ArrowLeft" aria-label="左へ移動">◀</button>
-        <button class="move-btn" data-key="ArrowRight" aria-label="右へ移動">▶</button>
+        <button class="move-btn" data-key="left" aria-label="左へ移動">◀</button>
+        <button class="move-btn" data-key="right" aria-label="右へ移動">▶</button>
       </div>
       <div class="touch-right">
-        <button class="jump-btn" data-key="Space" aria-label="ジャンプ">JUMP</button>
+        <button class="jump-btn" data-key="jump" aria-label="ジャンプ">JUMP</button>
       </div>
     </section>
   </main>
 
   <script src="js/game.js"></script>
   <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(() => {}));
-    }
+    if ('serviceWorker' in navigator) window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
   </script>
 </body>
 </html>
