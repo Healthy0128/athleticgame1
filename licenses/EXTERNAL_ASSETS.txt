@@ -1,0 +1,9 @@
+External asset license notes
+
+Kenney platformer graphics / sound effects:
+CC0 1.0 Universal. Attribution is not required.
+
+Two Simple Game Music Loops / qubodup:
+CC0 1.0 Universal.
+
+Always re-check the original distribution pages and license notes before a public/commercial release.
