@@ -1,26 +1,44 @@
 # Skybound Sprint
 
-横スクロール・アスレチックアクションゲームのWeb版です。
+Chat上で作成した、依存ライブラリなしの2D横スクロール・アスレチック試作です。
 
-## 対応操作
+## 起動
+`index.html` をブラウザで開くだけで遊べます。
 
-- キーボード: ← → / A D で移動、Space / W / ↑ でジャンプ、Shiftでダッシュ
-- iPhone / スマホ: 画面下のタッチボタン
-- Xboxコントローラー: 左スティックまたはD-padで移動、Aでジャンプ、XまたはRTでダッシュ
+## 操作
+- 左右: ← → または A / D
+- ジャンプ: Space / W / ↑
+- ダッシュ: 左右入力を同じ方向に素早く2回
+- 壁キック: 壁に接触した瞬間にジャンプ
+- スマホ: 画面下の仮想ボタン
+- Xboxコントローラー: 左スティック / D-padで移動、Aでジャンプ
 
-## iPhoneでWebアプリとして使う
+## 5ステージ版
+- ハート3制。敵接触・落下で1減少、0でGAME OVER
+- 全5ステージ。後半ほど難易度上昇
+- STAGE 3以降は壁キックを活用
+- 方向キー / 左右入力の2連打で約0.65秒ダッシュ
+- STAGE 5「Sky Tower」は縦スクロールで上へ登る高難度ステージ
+- iPhoneタッチ操作 / Xboxコントローラー対応
 
-1. GitHub Pagesで公開したURLをSafariで開く
-2. 共有ボタンをタップ
-3. 「ホーム画面に追加」を選ぶ
-4. ホーム画面のSkyboundアイコンから起動
+## 現在の実装
+- 横スクロール / 縦スクロールカメラ
+- 足場判定
+- ジャンプ / 壁キック / 2連打ダッシュ
+- ハート3制 / 無敵時間 / GAME OVER
+- コイン
+- 敵への踏みつけ
+- 被弾ノックバック
+- 落下リスポーン
+- 5ステージ進行
+- ゴール / リザルト
+- タイム計測
+- タッチ操作
+- Xboxコントローラー操作
+- PWA対応
 
-`manifest.webmanifest` と Service Worker を含むPWA構成です。ホーム画面から起動するとstandalone表示になります。
+## 外部素材について
+KenneyのCC0実PNGをリモート読み込みし、プレイヤーのidle / walk / jumpと足場タイル・アイテムを描画しています。詳細は `REMOTE_ASSETS.md` を参照してください。
 
-## 素材
-
-- Graphics: Kenney / CC0
-- Sound Effects: Kenney / CC0
-- Music: Two Simple Game Music Loops by qubodup / CC0
-
-詳細は `CREDITS.txt`、`REMOTE_ASSETS.md`、`AUDIO_REAL_ASSETS.md` を参照してください。
+## 実BGM・SE
+CC0の実OGG音源をゲームに接続済みです。ジャンプ、コイン、踏みつけ、被弾、クリア、ステージBGMが実音源で鳴ります。現在は公開URLから読み込むためネット接続が必要です。詳細は `AUDIO_REAL_ASSETS.md`。
