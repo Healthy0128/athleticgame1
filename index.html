@@ -2,8 +2,16 @@
 <html lang="ja">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+  <meta name="theme-color" content="#75d6f2">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Skybound">
+  <meta name="format-detection" content="telephone=no">
   <title>Skybound Sprint</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -36,21 +44,26 @@
     <section class="help">
       <button id="restartBtn">RESTART</button>
       <button id="muteBtn">SOUND ON</button>
-      <span>スマホ：画面下の仮想ボタン対応</span>
+      <span id="controllerStatus">スマホ / キーボード / Xboxコントローラー対応</span>
     </section>
 
     <section class="touch-controls" aria-label="タッチ操作">
       <div class="touch-left">
-        <button data-key="ArrowLeft">◀</button>
-        <button data-key="ArrowRight">▶</button>
+        <button class="move-btn" data-key="ArrowLeft" aria-label="左へ移動">◀</button>
+        <button class="move-btn" data-key="ArrowRight" aria-label="右へ移動">▶</button>
       </div>
       <div class="touch-right">
-        <button data-key="ShiftLeft">DASH</button>
-        <button data-key="Space">JUMP</button>
+        <button class="dash-btn" data-key="ShiftLeft" aria-label="ダッシュ">DASH</button>
+        <button class="jump-btn" data-key="Space" aria-label="ジャンプ">JUMP</button>
       </div>
     </section>
   </main>
 
   <script src="js/game.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(() => {}));
+    }
+  </script>
 </body>
 </html>
