@@ -1,0 +1,19 @@
+{
+  "name": "Skybound Sprint",
+  "short_name": "Skybound",
+  "description": "横スクロール・アスレチックアクションゲーム",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "landscape",
+  "background_color": "#dff5ff",
+  "theme_color": "#75d6f2",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
