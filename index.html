@@ -22,6 +22,8 @@
         <p>Chat上で作った横スクロール・アスレチック試作</p>
       </div>
       <div class="hud">
+        <span id="hearts" class="hearts">♥♥♥</span>
+        <span id="stage">STAGE 1/5</span>
         <span id="coins">COIN 0</span>
         <span id="time">TIME 0.0</span>
         <span id="status">READY</span>
@@ -35,7 +37,7 @@
         <div class="panel">
           <h2>Skybound Sprint</h2>
           <p>ゴール旗まで駆け抜けよう。</p>
-          <p class="controls">← → / A D：移動　Space / W / ↑：ジャンプ　Shift：ダッシュ</p>
+          <p class="controls">← → / A D：移動　Space / W / ↑：ジャンプ　方向キー2連打：ダッシュ　壁際ジャンプ：壁キック</p>
           <button id="startBtn">START</button>
         </div>
       </div>
@@ -53,13 +55,11 @@
         <button class="move-btn" data-key="ArrowRight" aria-label="右へ移動">▶</button>
       </div>
       <div class="touch-right">
-        <button class="dash-btn" data-key="ShiftLeft" aria-label="ダッシュ">DASH</button>
         <button class="jump-btn" data-key="Space" aria-label="ジャンプ">JUMP</button>
       </div>
     </section>
   </main>
 
-  <script src="js/controls.js"></script>
   <script src="js/game.js"></script>
   <script>
     if ('serviceWorker' in navigator) {
